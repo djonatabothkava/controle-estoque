@@ -4,14 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Controle de Estoque</title>
 </head>
 
 <body>
 
     <h1>Sistema de Controle de Estoque</h1>
+    <div class="dashboard">
 
+        <div class="card">
+            <h3>Produtos</h3>
+            <p>{{ total_produtos }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Quantidade em estoque</h3>
+            <p>{{ total_quantidade }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Valor do estoque</h3>
+            <p>R$ {{ "%.2f"|format(total_valor) }}</p>
+        </div>
+
+    </div>
     <h2>Cadastrar Produto</h2>
 
     <form action="/cadastrar" method="POST">

@@ -68,7 +68,7 @@ def atualizar_produto(id, nome, categoria, quantidade, preco):
     conexao.commit()
     conexao.close()
 
-    
+
 def excluir_produto(id):
     conexao = conectar()
 
@@ -79,3 +79,39 @@ def excluir_produto(id):
 
     conexao.commit()
     conexao.close()
+
+def contar_produtos():
+    conexao = conectar()
+
+    resultado = conexao.execute("""
+        SELECT COUNT(*) AS total
+        FROM produtos
+    """).fetchone()
+
+    conexao.close()
+
+    return resultado["total"]
+
+def quantidade_total():
+    conexao = conectar()
+
+    resultado = conexao.execute("""
+        SELECT COALESCE(SUM(quantidade), 0) AS total
+        FROM produtos
+    """).fetchone()
+
+    conexao.close()
+
+    return resultado["total"]
+
+def valor_total_estoque():
+    conexao = conectar()
+
+    resultado = conexao.execute("""
+        SELECT COALESCE(SUM(quantidade * preco), 0) AS total
+        FROM produtos
+    """).fetchone()
+
+    conexao.close()
+
+    return resultado["total"]

@@ -5,7 +5,10 @@ from database import (
     listar_produtos,
     buscar_produto,
     atualizar_produto,
-    excluir_produto
+    excluir_produto,
+    contar_produtos,
+    quantidade_total,
+    valor_total_estoque
 )
 
 app = Flask(__name__)
@@ -22,9 +25,20 @@ def excluir(id):
 
 @app.route("/")
 def inicio():
+
     produtos = listar_produtos()
 
-    return render_template("index.html", produtos=produtos)
+    total_produtos = contar_produtos()
+    total_quantidade = quantidade_total()
+    total_valor = valor_total_estoque()
+
+    return render_template(
+        "index.html",
+        produtos=produtos,
+        total_produtos=total_produtos,
+        total_quantidade=total_quantidade,
+        total_valor=total_valor
+    )
 
 
 @app.route("/cadastrar", methods=["POST"])
