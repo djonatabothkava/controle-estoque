@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Controle de Estoque</title>
+</head>
+
+<body>
+
+    <h1>Sistema de Controle de Estoque</h1>
+
+    <h2>Cadastrar Produto</h2>
+
+    <form action="/cadastrar" method="POST">
+
+        <label for="nome">Nome do produto:</label>
+        <br>
+        <input type="text" id="nome" name="nome" required>
+
+        <br><br>
+
+        <label for="categoria">Categoria:</label>
+        <br>
+        <input type="text" id="categoria" name="categoria" required>
+
+        <br><br>
+
+        <label for="quantidade">Quantidade:</label>
+        <br>
+        <input type="number" id="quantidade" name="quantidade" min="0" required>
+
+        <br><br>
+
+        <label for="preco">Preço:</label>
+        <br>
+        <input type="number" id="preco" name="preco" min="0" step="0.01" required>
+
+        <br><br>
+
+        <button type="submit">Cadastrar Produto</button>
+
+    </form>
+
+    <hr>
+
+    <h2>Produtos cadastrados</h2>
+
+    <table border="1">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Produto</th>
+                <th>Categoria</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for produto in produtos %}
+
+            <tr>
+                <td>{{ produto["id"] }}</td>
+                <td>{{ produto["nome"] }}</td>
+                <td>{{ produto["categoria"] }}</td>
+                <td>{{ produto["quantidade"] }}</td>
+                <td>R$ {{ "%.2f"|format(produto["preco"]) }}</td>
+                <td>
+                    <a href="/editar/{{ produto['id'] }}">Editar</a>
+
+                    <a href="/excluir/{{ produto['id'] }}">Excluir</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</body>
+
+</html>
