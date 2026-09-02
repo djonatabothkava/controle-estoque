@@ -29,6 +29,24 @@
         </div>
 
     </div>
+
+    <div class="card">
+            <h2>Pesquisar produtos</h2>
+
+            <form action="/pesquisar" method="GET"  class="pesquisa">
+                <input
+                    type="text"
+                    name="termo"
+                    placeholder="Digite o nome do produto..."
+                    value="{{ termo or '' }}"
+                >
+
+                <button type="submit">Pesquisar</button>
+
+                <a href="/">Limpar</a>
+            </form>
+        </div>
+
     <h2>Cadastrar Produto</h2>
 
     <form action="/cadastrar" method="POST">

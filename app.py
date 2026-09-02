@@ -8,12 +8,35 @@ from database import (
     excluir_produto,
     contar_produtos,
     quantidade_total,
-    valor_total_estoque
+    valor_total_estoque,
+    pesquisar_produtos
 )
 
 app = Flask(__name__)
 
 criar_tabela()
+
+@app.route("/pesquisar")
+def pesquisar():
+    termo = request.args.get("termo", "").strip()
+
+    if termo:
+        produtos = pesquisar_produtos(termo)
+    else:
+        produtos = listar_produtos()
+
+    total_produtos = contar_produtos()
+    total_quantidade = quantidade_total()
+    total_valor = valor_total_estoque()
+
+    return render_template(
+        "index.html",
+        produtos=produtos,
+        total_produtos=total_produtos,
+        total_quantidade=total_quantidade,
+        total_valor=total_valor,
+        termo=termo
+    )
 
 @app.route("/excluir/<int:id>")
 def excluir(id):

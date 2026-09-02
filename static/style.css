@@ -93,3 +93,29 @@ a {
     font-size: 28px;
     font-weight: bold;
 }
+.pesquisa {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.pesquisa input {
+    flex: 1;
+    max-width: none;
+}
+
+.pesquisa button {
+    white-space: nowrap;
+}
+
+.pesquisa a {
+    background: #eee;
+    color: #222;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 0;
+}
+
+.pesquisa a:hover {
+    background: #ddd;
+}

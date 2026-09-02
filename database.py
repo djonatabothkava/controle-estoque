@@ -115,3 +115,16 @@ def valor_total_estoque():
     conexao.close()
 
     return resultado["total"]
+
+def pesquisar_produtos(termo):
+    conexao = conectar()
+
+    produtos = conexao.execute("""
+        SELECT * FROM produtos
+        WHERE nome LIKE ?
+        ORDER BY id DESC
+    """, (f"%{termo}%",)).fetchall()
+
+    conexao.close()
+
+    return produtos
